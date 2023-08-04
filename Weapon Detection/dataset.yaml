@@ -1,0 +1,15 @@
+path: ../Weapon Detection/Dataset/weapon_detection
+train: 'train/images'
+val: 'val/images'
+test: 'test/test'
+
+names:
+  0: Automatic Rifle_99.jpeg
+  1: Bazooka_99.jpeg
+  2: Grenade Launcher_99.png
+  3: Handgun_99.jpeg
+  4: Knife_95.jpeg
+  5: Shotgun_98.jpeg
+  6: SMG_99.jpeg
+  7: Sniper_99.jpeg
+  8: Sword_99.jpeg
