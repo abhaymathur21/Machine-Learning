@@ -1,7 +1,7 @@
-path: ../Weapon Detection/Dataset/weapon_detection
-train: 'train/images'
-val: 'val/images'
-test: 'test/test'
+path: ../Dataset/weapon_detection
+train: train/images
+val: val/images
+test: test/test
 
 names:
   0: Automatic Rifle_99.jpeg
