@@ -25,15 +25,15 @@ bat1 = cv.imread(r"C:\Users\a21ma\OneDrive\Desktop\Code\Machine Learning\Ping Po
 bat2 = cv.imread(r"C:\Users\a21ma\OneDrive\Desktop\Code\Machine Learning\Ping Pong Game\Resources\bat2.png",cv.IMREAD_UNCHANGED)
 gameOver = cv.imread(r'C:\Users\a21ma\OneDrive\Desktop\Code\Machine Learning\Ping Pong Game\Resources\gameOver.png')
 
-print(background.shape)
-print(ball.shape)
-print(bat1.shape)
-print(bat2.shape)
-print(gameOver.shape)
+# print(background.shape)
+# print(ball.shape)
+# print(bat1.shape)
+# print(bat2.shape)
+# print(gameOver.shape)
 # Set initial ball postion, score, a flag and the speeds
 position = [100, 100]
 isOver = False
-speedX, speedY = 10, 10
+speedX, speedY = 15, 15
 score = [0, 0]
 
 # To capture video footage from the camera.
@@ -60,19 +60,18 @@ while True:
             y1 = y - h1//2  # To ensure your hands are at center of the bat.
             # Clips the value to ensure overlays don't occur outside the pop-up space.
             y1 = np.clip(y1, 20, 415)
-            # Draw the bats
+            
             if hand['type'] == 'Left':
+                left_bat_pos = 59
+                frame = cvzone.overlayPNG(frame, bat1, (left_bat_pos, y1))
                 
-                frame = cvzone.overlayPNG(frame, bat1, (59, y1))
-                
-                if (59 < position[0] < 59 + w1) and (y1 < position[1] < y1 + h1):
+                if (left_bat_pos< position[0] < left_bat_pos + w1) and (y1 < position[1] < y1 + h1):
                     # If bat hits the ball, reverse the ball direction along x-axis.
                     speedX = -speedX
                     position[0] += 20
                     score[0] += 1
 
             if hand['type'] == 'Right':
-                
                 frame = cvzone.overlayPNG(frame, bat2, (1195, y1))
                 if (1145 < position[0] < 1165) and (y1 < position[1] < y1 + h1):
                     speedX = -speedX
@@ -86,7 +85,7 @@ while True:
     if isOver:
         frame = gameOver
         cv.putText(frame, str(score[1] + score[0]).zfill(2), (585, 360), cv.FONT_HERSHEY_COMPLEX,
-                   2.5, (200, 0, 200), 5)  # (200, 0, 200) gives purple colour
+                   2.5, (200, 0, 200), 5) 
     else:
         # Move the ball. If the ball hits the wall of upper rectangle, reverse its direction along y-axis.
         if position[1] >= 500 or position[1] <= 10:
@@ -96,7 +95,7 @@ while True:
         position[0] += speedX
         position[1] += speedY
         
-        print(frame.shape)
+        # print(frame.shape)
         # Draw the ball
         frame = cvzone.overlayPNG(frame, ball, position)
         # Display score as game goes on. we use putText() for this. (255, 255, 255) is white colour
@@ -112,8 +111,8 @@ while True:
     # If R is pressed, re-initialise the respective variables and restart the game.
     if key == ord('r'):
         position = [100, 100]
-        speedX = 10
-        speedY = 10
+        speedX = 15
+        speedY = 15
         isOver = False
         score = [0, 0]
         gameOver = cv.imread(r'C:\Users\a21ma\OneDrive\Desktop\Code\Machine Learning\Ping Pong Game\Resources\gameOver.png')
